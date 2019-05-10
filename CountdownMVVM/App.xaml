@@ -1,0 +1,9 @@
+﻿<Application x:Class="CountdownMVVM.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:CountdownMVVM"
+             StartupUri="Views\CountdownView.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
