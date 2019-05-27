@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace CountdownShared.ViewModels
 {
-    public class CountdownViewModel
+    public class CountdownViewModel : ViewModel
     {
         public CountdownViewModel()
         {
@@ -16,7 +16,7 @@ namespace CountdownShared.ViewModels
             timer = new AppTimer(200);
             timer.AfterTick += AfterTick;
             timerSheets = new ObservableCollection<TimerSheetViewModel>();
-            CreateCommand = new CountdownViewModelCreateCommand(this);
+            CreateCommand = new CreateCommand<CountdownViewModel>(this);
             System.IO.File.Create("timer.txt");
         }
 
@@ -52,7 +52,7 @@ namespace CountdownShared.ViewModels
             }
         }
 
-        public void SaveChanges()
+        public void SaveChanged()
         {
             TimerSheetViewModel tsvm = new TimerSheetViewModel(Countdown.Hours, Countdown.Minutes, Countdown.Seconds, Countdown.Description);
             timer.Tick += tsvm.Tick;

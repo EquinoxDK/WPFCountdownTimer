@@ -1,24 +1,21 @@
-﻿using CountdownShared.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
+
 namespace CountdownShared.Commands
 {
-    internal class CountdownViewModelCreateCommand : ICommand
+    class CreateCommand<T> : ICommand where T : ViewModel
     {
-        public CountdownViewModelCreateCommand(CountdownViewModel viewModel)
+        public CreateCommand(T viewModel)
         {
-            _viewModel = viewModel;
-
+            this.viewModel = viewModel;
         }
 
-        private CountdownViewModel _viewModel;
-
-
+        private T viewModel;
 
         public event EventHandler CanExecuteChanged
         {
@@ -28,12 +25,12 @@ namespace CountdownShared.Commands
 
         public bool CanExecute(object parameter)
         {
-            return _viewModel.CanUpdate;
+            return viewModel.CanUpdate;
         }
 
         public void Execute(object parameter)
         {
-            _viewModel.SaveChanges();
+            viewModel.SaveChanged();
         }
     }
 }

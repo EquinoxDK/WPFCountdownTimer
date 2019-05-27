@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace CountdownShared.ViewModels
 {
-    public class TimerSheetViewModel
+    public class TimerSheetViewModel : ViewModel
     {
         private readonly DateTime start;
         private readonly TimeSpan time;
@@ -20,7 +20,7 @@ namespace CountdownShared.ViewModels
         {
             start = DateTime.Now;
             time = new TimeSpan(Hours, Minutes, Seconds);
-            CloseCommand = new TimerSheetViewModelCloseCommand(this);
+            CloseCommand = new CreateCommand<TimerSheetViewModel>(this);
             timerSheet = new TimerSheetModel { Text = Description, Time = CreateTime(time) };
         }
 
@@ -46,7 +46,7 @@ namespace CountdownShared.ViewModels
             get { return true; }
         }
 
-        internal void SaveChanged()
+        public void SaveChanged()
         {
             DoRemoveButton(this);
         }
