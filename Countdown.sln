@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Countdown", "Countdown\Coun
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountdownMVVM", "CountdownMVVM\CountdownMVVM.csproj", "{24E51711-7F50-4AAD-B98B-480BB0B68228}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountdownShared", "CountdownShared\CountdownShared.csproj", "{DEE16C01-C001-4F70-A666-5771ED4261A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountdownGUI", "CountdownGUI\CountdownGUI.csproj", "{90E19C0B-82DF-47E2-9009-939F98EE4A24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{24E51711-7F50-4AAD-B98B-480BB0B68228}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24E51711-7F50-4AAD-B98B-480BB0B68228}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24E51711-7F50-4AAD-B98B-480BB0B68228}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEE16C01-C001-4F70-A666-5771ED4261A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEE16C01-C001-4F70-A666-5771ED4261A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEE16C01-C001-4F70-A666-5771ED4261A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEE16C01-C001-4F70-A666-5771ED4261A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90E19C0B-82DF-47E2-9009-939F98EE4A24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90E19C0B-82DF-47E2-9009-939F98EE4A24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90E19C0B-82DF-47E2-9009-939F98EE4A24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90E19C0B-82DF-47E2-9009-939F98EE4A24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
