@@ -6,6 +6,7 @@ using System.Text;
 using System.Timers;
 using System.Windows;
 using System.Windows.Input;
+using System.Configuration;
 
 namespace CountdownMVVM.ViewModels
 {
@@ -18,12 +19,15 @@ namespace CountdownMVVM.ViewModels
             timer.AfterTick += AfterTick;
             timerSheets = new ObservableCollection<TimerSheetViewModel>();
             CreateCommand = new CountdownViewModelCreateCommand(this);
-            System.IO.File.Create("timer.txt");
+
+            OutputFilename = ConfigurationManager.AppSettings["Filename"];
+            System.IO.File.Create(OutputFilename);
+
         }
 
         private AppTimer timer;
         private bool CanSave = true;
-
+        private readonly string OutputFilename;
         private ObservableCollection<TimerSheetViewModel> timerSheets;
         public ObservableCollection<TimerSheetViewModel> TimerSheets
         {
@@ -77,21 +81,20 @@ namespace CountdownMVVM.ViewModels
         private void SaveList()
         {
             CanSave = false;
-            string filename = @"timer.txt";
-            string content = "";
+            
             StringBuilder sb = new StringBuilder();
             foreach (TimerSheetViewModel item in TimerSheets)
             {
                 sb.AppendLine($"{item.TimerSheet.Text} {item.TimerSheet.Time}");
             }
-            content = sb.ToString();
+            string content = sb.ToString();
 
             try
             {
-                string oldContent = System.IO.File.ReadAllText(filename);
+                string oldContent = System.IO.File.ReadAllText(OutputFilename);
                 if (!content.Equals(oldContent))
                 {
-                    System.IO.File.WriteAllText(filename, content);
+                    System.IO.File.WriteAllText(OutputFilename, content);
                 }
             }
             catch (Exception)
