@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 
 namespace CountdownShared.Commands
 {
-    class CreateCommand<T> : ICommand where T : ViewModel
+    class CommandResolver<T> : ICommand where T : ViewModel
     {
-        public CreateCommand(T viewModel)
+        public CommandResolver(T viewModel)
         {
             this.viewModel = viewModel;
         }

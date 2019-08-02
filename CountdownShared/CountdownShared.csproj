@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\CreateCommand.cs" />
+    <Compile Include="Commands\CommandResolver.cs" />
     <Compile Include="Commands\ViewModel.cs" />
     <Compile Include="Models\AppTimer.cs" />
     <Compile Include="Models\CountdownModel.cs" />

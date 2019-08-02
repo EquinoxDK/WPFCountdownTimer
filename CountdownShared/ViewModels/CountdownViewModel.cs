@@ -5,18 +5,23 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Timers;
 using System.Windows.Input;
+using System.Linq;
 
 namespace CountdownShared.ViewModels
 {
     public class CountdownViewModel : ViewModel
     {
-        public CountdownViewModel()
+        public CountdownViewModel(SaveList saveList)
         {
+            if (saveList != null)
+            {
+                DoSaveList += saveList;
+            }
             countdown = new CountdownModel();
             timer = new AppTimer(200);
             timer.AfterTick += AfterTick;
             timerSheets = new ObservableCollection<TimerSheetViewModel>();
-            CreateCommand = new CreateCommand<CountdownViewModel>(this);
+            CreateCommand = new CommandResolver<CountdownViewModel>(this);
             System.IO.File.Create("timer.txt");
         }
 
@@ -67,37 +72,14 @@ namespace CountdownShared.ViewModels
 
         private void AfterTick(ElapsedEventArgs e)
         {
-            if (CanSave)
+            if (DoSaveList != null)
             {
-                SaveList();
+                DoSaveList(TimerSheets.ToArray());
+
             }
         }
 
-        private void SaveList()
-        {
-            CanSave = false;
-            string filename = @"timer.txt";
-            string content = "";
-            StringBuilder sb = new StringBuilder();
-            foreach (TimerSheetViewModel item in TimerSheets)
-            {
-                sb.AppendLine($"{item.TimerSheet.Text} {item.TimerSheet.Time}");
-            }
-            content = sb.ToString();
-
-            try
-            {
-                string oldContent = System.IO.File.ReadAllText(filename);
-                if (!content.Equals(oldContent))
-                {
-                    System.IO.File.WriteAllText(filename, content);
-                }
-            }
-            catch (Exception)
-            {
-
-            }
-            CanSave = true;
-        }
+        public delegate void SaveList(TimerSheetViewModel[] sheets);
+        public SaveList DoSaveList;
     }
 }

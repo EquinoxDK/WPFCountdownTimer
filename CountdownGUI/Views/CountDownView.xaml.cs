@@ -11,7 +11,7 @@ namespace CountdownGUI.Views
         public CountdownView()
         {
             InitializeComponent();
-            DataContext = new CountdownViewModel();
+            DataContext = new CountdownViewModel(Helpers.SaveHelper.SaveList);
         }
     }
 }
