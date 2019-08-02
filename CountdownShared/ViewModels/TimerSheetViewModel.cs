@@ -6,22 +6,19 @@ using System.Windows.Input;
 
 namespace CountdownShared.ViewModels
 {
-    public class TimerSheetViewModel : ViewModel
+    public class TimerSheetViewModel : IViewModel
     {
         private readonly DateTime start;
         private readonly TimeSpan time;
-        private readonly TimerSheetModel timerSheet;
-        public TimerSheetModel TimerSheet
-        {
-            get { return timerSheet; }
-        }
+
+        public TimerSheetModel TimerSheet { get; }
 
         public TimerSheetViewModel(int Hours, int Minutes, int Seconds, string Description)
         {
             start = DateTime.Now;
             time = new TimeSpan(Hours, Minutes, Seconds);
             CloseCommand = new CreateCommand<TimerSheetViewModel>(this);
-            timerSheet = new TimerSheetModel { Text = Description, Time = CreateTime(time) };
+            TimerSheet = new TimerSheetModel { Text = Description, Time = CreateTime(time) };
         }
 
         private string CreateTime(TimeSpan timeLeft)
@@ -53,7 +50,7 @@ namespace CountdownShared.ViewModels
 
         internal void Tick(ElapsedEventArgs e)
         {
-            timerSheet.Time = CreateTime(time - (e.SignalTime - start));
+            TimerSheet.Time = CreateTime(time - (e.SignalTime - start));
         }
     }
 }

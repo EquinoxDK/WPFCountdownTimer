@@ -5,35 +5,30 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Timers;
 using System.Windows.Input;
+using System.Configuration;
 
 namespace CountdownShared.ViewModels
 {
-    public class CountdownViewModel : ViewModel
+    public class CountdownViewModel : IViewModel
     {
         public CountdownViewModel()
         {
-            countdown = new CountdownModel();
+            OutputFilename = ConfigurationManager.AppSettings["Filename"];
+            Countdown = new CountdownModel();
             timer = new AppTimer(200);
             timer.AfterTick += AfterTick;
-            timerSheets = new ObservableCollection<TimerSheetViewModel>();
+            TimerSheets = new ObservableCollection<TimerSheetViewModel>();
             CreateCommand = new CreateCommand<CountdownViewModel>(this);
-            System.IO.File.Create("timer.txt");
+            System.IO.File.Create(OutputFilename);
         }
 
-        private AppTimer timer;
+        private readonly string OutputFilename;
+        private readonly AppTimer timer;
         private bool CanSave = true;
-        
-        private ObservableCollection<TimerSheetViewModel> timerSheets;
-        public ObservableCollection<TimerSheetViewModel> TimerSheets
-        {
-            get { return timerSheets; }
-        }
 
-        private CountdownModel countdown;
-        public CountdownModel Countdown
-        {
-            get { return countdown; }
-        }
+        public ObservableCollection<TimerSheetViewModel> TimerSheets { get; }
+
+        public CountdownModel Countdown { get; }
 
         public ICommand CreateCommand { get; private set; }
         public bool CanUpdate
@@ -54,6 +49,7 @@ namespace CountdownShared.ViewModels
 
         public void SaveChanged()
         {
+
             TimerSheetViewModel tsvm = new TimerSheetViewModel(Countdown.Hours, Countdown.Minutes, Countdown.Seconds, Countdown.Description);
             timer.Tick += tsvm.Tick;
             tsvm.DoRemoveButton = RemoveButton;
@@ -62,7 +58,7 @@ namespace CountdownShared.ViewModels
 
         private void RemoveButton(TimerSheetViewModel viewModel)
         {
-            timerSheets.Remove(viewModel);
+            TimerSheets.Remove(viewModel);
         }
 
         private void AfterTick(ElapsedEventArgs e)
@@ -76,21 +72,19 @@ namespace CountdownShared.ViewModels
         private void SaveList()
         {
             CanSave = false;
-            string filename = @"timer.txt";
-            string content = "";
             StringBuilder sb = new StringBuilder();
             foreach (TimerSheetViewModel item in TimerSheets)
             {
                 sb.AppendLine($"{item.TimerSheet.Text} {item.TimerSheet.Time}");
             }
-            content = sb.ToString();
+            string content = sb.ToString();
 
             try
             {
-                string oldContent = System.IO.File.ReadAllText(filename);
+                string oldContent = System.IO.File.ReadAllText(OutputFilename);
                 if (!content.Equals(oldContent))
                 {
-                    System.IO.File.WriteAllText(filename, content);
+                    System.IO.File.WriteAllText(OutputFilename, content);
                 }
             }
             catch (Exception)

@@ -11,7 +11,7 @@ namespace CountdownMVVM.Models
 {
     public class AppTimer  
     {
-        private System.Timers.Timer TheTimer;
+        private readonly System.Timers.Timer TheTimer;
         public event Tickhandler Tick;
         public event Tickhandler AfterTick;
         public delegate void Tickhandler(System.Timers.ElapsedEventArgs e);

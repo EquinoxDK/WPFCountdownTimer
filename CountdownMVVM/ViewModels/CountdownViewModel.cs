@@ -25,16 +25,16 @@ namespace CountdownMVVM.ViewModels
 
         }
 
-        private AppTimer timer;
+        private readonly AppTimer timer;
         private bool CanSave = true;
         private readonly string OutputFilename;
-        private ObservableCollection<TimerSheetViewModel> timerSheets;
+        private readonly ObservableCollection<TimerSheetViewModel> timerSheets;
         public ObservableCollection<TimerSheetViewModel> TimerSheets
         {
             get { return timerSheets; }
         }
 
-        private CountdownModel countdown;
+        private readonly CountdownModel countdown;
         public CountdownModel Countdown
         {
             get { return countdown; }

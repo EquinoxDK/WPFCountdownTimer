@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\CreateCommand.cs" />
-    <Compile Include="Commands\ViewModel.cs" />
+    <Compile Include="Commands\IViewModel.cs" />
     <Compile Include="Models\AppTimer.cs" />
     <Compile Include="Models\CountdownModel.cs" />
     <Compile Include="Models\TimerSheetModel.cs" />

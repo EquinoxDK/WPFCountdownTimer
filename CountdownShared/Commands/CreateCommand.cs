@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace CountdownShared.Commands
 {
-    class CreateCommand<T> : ICommand where T : ViewModel
+    class CreateCommand<T> : ICommand where T : IViewModel
     {
         public CreateCommand(T viewModel)
         {
