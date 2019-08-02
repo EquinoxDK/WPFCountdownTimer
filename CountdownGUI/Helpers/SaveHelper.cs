@@ -1,6 +1,6 @@
-﻿using CountdownShared.ViewModels;
-using System;
+﻿using System;
 using System.Text;
+using CountdownShared.ViewModels;
 
 namespace CountdownGUI.Helpers
 {

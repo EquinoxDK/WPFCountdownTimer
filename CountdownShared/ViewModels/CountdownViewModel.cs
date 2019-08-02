@@ -19,8 +19,9 @@ namespace CountdownShared.ViewModels
             timer = new AppTimer(200);
             timer.AfterTick += AfterTick;
             TimerSheets = new ObservableCollection<TimerSheetViewModel>();
-            CreateCommand = new CreateCommand<CountdownViewModel>(this);
+            CreateCommand = new CommandResolver<CountdownViewModel>(this);
             System.IO.File.Create(OutputFilename);
+            DoSaveList += saveList;
         }
 
         private readonly string OutputFilename;
@@ -32,6 +33,7 @@ namespace CountdownShared.ViewModels
         public CountdownModel Countdown { get; }
 
         public ICommand CreateCommand { get; private set; }
+        
         public bool CanUpdate
         {
             get
@@ -66,30 +68,9 @@ namespace CountdownShared.ViewModels
         {
             if (CanSave)
             {
-                SaveList();
+                DoSaveList(TimerSheets.ToArray());
             }
         }
-
-        private void SaveList()
-        {
-            CanSave = false;
-            StringBuilder sb = new StringBuilder();
-            foreach (TimerSheetViewModel item in TimerSheets)
-            {
-                sb.AppendLine($"{item.TimerSheet.Text} {item.TimerSheet.Time}");
-            }
-            string content = sb.ToString();
-
-            try
-            {
-                string oldContent = System.IO.File.ReadAllText(OutputFilename);
-                if (!content.Equals(oldContent))
-                {
-                    System.IO.File.WriteAllText(OutputFilename, content);
-                }
-            }
-            catch (Exception)
-            {
 
         public delegate void SaveList(TimerSheetViewModel[] sheets);
         public SaveList DoSaveList;

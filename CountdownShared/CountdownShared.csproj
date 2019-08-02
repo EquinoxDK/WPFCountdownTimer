@@ -44,7 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\CommandResolver.cs" />
-    <Compile Include="Commands\ViewModel.cs" />
+    <Compile Include="Commands\DelegateCommandResolver.cs" />
+    <Compile Include="Commands\IViewModel.cs" />
     <Compile Include="Models\AppTimer.cs" />
     <Compile Include="Models\CountdownModel.cs" />
     <Compile Include="Models\TimerSheetModel.cs" />

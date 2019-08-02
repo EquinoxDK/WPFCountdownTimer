@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace CountdownShared.Commands
 {
-    class CommandResolver<T> : ICommand where T : ViewModel
+    class CommandResolver<T> : ICommand where T : IViewModel
     {
         public CommandResolver(T viewModel)
         {
