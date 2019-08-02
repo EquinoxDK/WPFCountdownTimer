@@ -14,6 +14,11 @@ namespace CountdownShared.Models
 
         }
 
+        public CountdownModel(string Description)
+        {
+            description = Description;
+        }
+
         private string description;
         public string Description
         {

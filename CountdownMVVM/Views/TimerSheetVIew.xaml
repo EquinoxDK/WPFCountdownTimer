@@ -16,7 +16,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TextBlock x:Name="Text" Text="{Binding TimerSheet.Text}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"/>
-        <TextBlock x:Name="Time" Text="{Binding TimerSheet.Time}" Grid.Column="0" Grid.Row="1"/>
+        <TextBlock x:Name="Time" Text="{Binding TimerSheet.Time}" Grid.Column="0" Grid.Row="1" />
         <Button x:Name="CloseButton" Command="{Binding CloseCommand}" Grid.Column="1" Grid.Row="0" Content="X" HorizontalAlignment="Right"  VerticalAlignment="Top" FontWeight="Bold" Background="{x:Null}" BorderThickness="0"/>
     </Grid>
 </UserControl>
