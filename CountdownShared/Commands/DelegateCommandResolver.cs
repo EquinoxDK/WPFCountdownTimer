@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace CountdownShared.Commands
 {
-    class DelegateCommandResolver : ICommand
+    public class DelegateCommandResolver : ICommand
     {
         private readonly Action execute;
         private readonly Func<bool> canExecute;

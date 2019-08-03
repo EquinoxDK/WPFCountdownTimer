@@ -19,7 +19,7 @@ namespace CountdownShared.ViewModels
             timer = new AppTimer(200);
             timer.AfterTick += AfterTick;
             TimerSheets = new ObservableCollection<TimerSheetViewModel>();
-            CreateCommand = new CommandResolver<CountdownViewModel>(this);
+            CreateCommand = new DelegateCommandResolver(SaveChanged, () => CanUpdate);
             System.IO.File.Create(OutputFilename);
             DoSaveList += saveList;
         }
@@ -46,8 +46,14 @@ namespace CountdownShared.ViewModels
                     !string.IsNullOrWhiteSpace(Countdown.Description) &&
                     (Countdown.Hours >= 0 && Countdown.Hours <= 23) &&
                     (Countdown.Minutes >= 0 && Countdown.Minutes <= 59) &&
-                    (Countdown.Seconds >= 0 && Countdown.Seconds <= 59);
+                    (Countdown.Seconds >= 0 && Countdown.Seconds <= 59) && 
+                    (Countdown.Hours != 0 || Countdown.Minutes != 0 || Countdown.Seconds != 0);
             }
+        }
+
+        public void ClearOutputFile()
+        {
+            System.IO.File.WriteAllText(OutputFilename, "");
         }
 
         public void SaveChanged()
@@ -57,6 +63,10 @@ namespace CountdownShared.ViewModels
             timer.Tick += tsvm.Tick;
             tsvm.DoRemoveButton = RemoveButton;
             TimerSheets.Add(tsvm);
+            Countdown.Hours = 0;
+            Countdown.Minutes = 0;
+            Countdown.Seconds = 0;
+            Countdown.Description = "";
         }
 
         private void RemoveButton(TimerSheetViewModel viewModel)
@@ -68,11 +78,11 @@ namespace CountdownShared.ViewModels
         {
             if (CanSave)
             {
-                DoSaveList(TimerSheets.ToArray());
+                DoSaveList(TimerSheets.ToArray(), OutputFilename);
             }
         }
 
-        public delegate void SaveList(TimerSheetViewModel[] sheets);
+        public delegate void SaveList(TimerSheetViewModel[] sheets, string outputfile);
         public SaveList DoSaveList;
     }
 }

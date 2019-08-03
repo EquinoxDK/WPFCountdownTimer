@@ -17,7 +17,7 @@ namespace CountdownShared.ViewModels
         {
             start = DateTime.Now;
             time = new TimeSpan(Hours, Minutes, Seconds);
-            CloseCommand = new CommandResolver<TimerSheetViewModel>(this);
+            CloseCommand = new DelegateCommandResolver(SaveChanged);
             TimerSheet = new TimerSheetModel { Text = Description, Time = CreateTime(time) };
         }
 

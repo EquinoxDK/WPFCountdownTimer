@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CountdownGUI.Views"
         xmlns:ViewModels="clr-namespace:CountdownShared.ViewModels;assembly=CountdownShared"
         mc:Ignorable="d"
-        Title="Countdown" Height="379.85" Width="300" MinWidth="270" MinHeight="200">
+        Title="Countdown" Height="379.85" Width="300" MinWidth="270" MinHeight="200" Closing="Window_Closing">
     <Grid x:Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>

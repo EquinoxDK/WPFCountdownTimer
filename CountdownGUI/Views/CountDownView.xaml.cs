@@ -13,5 +13,14 @@ namespace CountdownGUI.Views
             InitializeComponent();
             DataContext = new CountdownViewModel(Helpers.SaveHelper.SaveList);
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = MessageBox.Show("Want to exit app?", "Exit", MessageBoxButton.YesNo) != MessageBoxResult.Yes;
+            if (!e.Cancel)
+            {
+                (DataContext as CountdownViewModel).ClearOutputFile();
+            }
+        }
     }
 }

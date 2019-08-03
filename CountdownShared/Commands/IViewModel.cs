@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CountdownShared.Commands
 {
-    interface IViewModel
+    public interface IViewModel
     {
         bool CanUpdate { get; }
 

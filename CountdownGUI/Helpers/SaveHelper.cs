@@ -8,12 +8,12 @@ namespace CountdownGUI.Helpers
     {
         static private bool CanSave = true;
 
-        static public void SaveList(TimerSheetViewModel[] sheets)
+        static public void SaveList(TimerSheetViewModel[] sheets, string Outputfilename)
         {
             if (CanSave)
             {
                 CanSave = false;
-                string filename = @"timer.txt";
+                string filename = Outputfilename;
                 string content = "";
                 StringBuilder sb = new StringBuilder();
                 foreach (TimerSheetViewModel item in sheets)
